@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<a href="/" class="btn btn-link mb-3">&larr; Back</a>
+<h2>Popular Routes{% if source %} from {{ source }}{% endif %}{% if dest %} to {{ dest }}{% endif %}</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Source</th>
+            <th>Destination</th>
+            <th>Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in popular_routes %}
+        <tr>
+            <td>{{ row.SourceAirport }}</td>
+            <td>{{ row.DestAirport }}</td>
+            <td>{{ row.Count }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div id="chart"></div>
+<script>
+    var data = [{
+        x: [{% for row in popular_routes %}"{{ row.SourceAirport }}-{{ row.DestAirport }}",{% endfor %}],
+        y: [{% for row in popular_routes %}{{ row.Count }},{% endfor %}],
+        type: 'bar'
+    }];
+    Plotly.newPlot('chart', data, {title: 'Top 10 Popular Routes'});
+</script>
+{% endblock %} 

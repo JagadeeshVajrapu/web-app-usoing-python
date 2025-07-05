@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="post">
+    <div class="mb-3">
+        <label for="source" class="form-label">Source Airport</label>
+        <select name="source" id="source" class="form-select">
+            <option value="">Any</option>
+            {% for airport in airports %}
+            <option value="{{ airport }}">{{ airport }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="dest" class="form-label">Destination Airport</label>
+        <select name="dest" id="dest" class="form-select">
+            <option value="">Any</option>
+            {% for airport in airports %}
+            <option value="{{ airport }}">{{ airport }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Analyze</button>
+</form>
+{% endblock %} 
